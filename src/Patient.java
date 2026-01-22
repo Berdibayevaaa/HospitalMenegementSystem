@@ -1,72 +1,38 @@
-public class Patient {
-    // Private Fields
-    private int patientId;
-    private String fullName;
-    private int age;
-    private String bloodType;
+public class Patient extends MedicalStaff {
+    // Дополнительное поле, специфичное для Patient
+    private String medicalHistory;
 
-    // Constructor with parameters
-    public Patient(int patientId, String fullName, int age, String bloodType) {
-        this.patientId = patientId;
-        this.fullName = fullName;
-        this.age = age;
-        this.bloodType = bloodType;
+    // Конструктор - использует super() для вызова конструктора родителя
+    public Patient(int id, String name, int age, String address, String medicalHistory) {
+        super(id, name, age, address); // ОБЯЗАТЕЛЬНО ПЕРВЫМ!
+        this.medicalHistory = medicalHistory;
     }
 
-    // Default constructor (optional)
-    public Patient() {
-        this.patientId = 0;
-        this.fullName = "Unknown";
-        this.age = 0;
-        this.bloodType = "Unknown";
+    // Геттер и Сеттер для нового поля
+    public String getMedicalHistory() { return medicalHistory; }
+    public void setMedicalHistory(String medicalHistory) { this.medicalHistory = medicalHistory; }
+
+    // Переопределение метода work()
+    @Override
+    public void work() {
+        System.out.println(name + " is receiving treatment.");
     }
 
-    // Getters
-    public int getPatientId() {
-        return patientId;
+    // Переопределение метода getRole()
+    @Override
+    public String getRole() {
+        return "Patient";
     }
 
-    public String getFullName() {
-        return fullName;
+    // Новый метод, специфичный для Patient
+    public void updateMedicalHistory(String newHistory) {
+        this.medicalHistory = newHistory;
+        System.out.println(name + "'s medical history updated.");
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public String getBloodType() {
-        return bloodType;
-    }
-
-    // Setters
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setBloodType(String bloodType) {
-        this.bloodType = bloodType;
-    }
-
-    // Methods with business logic
-    public boolean isMinor() {
-        return this.age < 18;
-    }
-
-    public String getAgeCategory() {
-        return isMinor() ? "Minor" : "Adult";
-    }
-
-    // toString method to display patient info
+    // Метод toString
     @Override
     public String toString() {
-        return "Patient{ID=" + patientId + ", Name='" + fullName + "', Age=" + age + ", Blood Type='" + bloodType + "'}";
+        return super.toString() + " | Medical History: " + medicalHistory;
     }
 }
