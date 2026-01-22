@@ -1,3 +1,5 @@
+package model;
+
 public class Appointment {
     // Поля для записи на прием
     private int appointmentId;
@@ -35,7 +37,7 @@ public class Appointment {
         this.date = "Cancelled";
     }
 
-    // Метод toString
+    // Метод toString для отображения информации о записи
     @Override
     public String toString() {
         return "Appointment{ID=" + appointmentId + ", Patient='" + patientName + "', Doctor='" + doctorName + "', Date='" + date + "'}";
